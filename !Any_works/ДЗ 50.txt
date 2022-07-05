@@ -1,0 +1,132 @@
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string.h>
+
+
+using namespace std;
+random_device Rand;
+
+int mystrcmp(char* mas1, char* mas2)
+{
+	int col1 = 0, col2 = 0;
+
+	for (int i = 0; mas1[i] != '\0'; i++)
+	{
+		col1++;
+	}
+	for (int i = 0; mas2[i] != '\0'; i++)
+	{
+		col2++;
+	}
+	if (col1 == col2)
+	{
+		cout << "Равны!" << endl;
+		return 0;
+	}
+	else if (col1 > col2)
+	{
+		cout << "Первая больше второй!" << endl;
+		return 1;
+	}
+	else
+	{
+		cout << "Вторая больше первой!" << endl;
+		return -1;
+	}
+}
+
+int StrToNum(char* mas)
+{
+	int tmp = atoi(mas);
+	cout << "Your num: " << tmp << endl;
+	return 0;
+}
+
+char* NumToStr(int number)
+{
+	size_t size = 1;
+	char* mas = new char[size]{};
+	for (int i = 0; number % 10 != 0; i++)
+	{
+		size++;
+		mas[i] = (number % 10) + 48;
+		number /= 10;
+		cout << mas[i] << " ";
+	}
+	
+	return 0;
+}
+
+char* Uppercase(char* mas)
+{
+	for (int i = 0; mas[i] != '\0'; i++)
+	{
+		mas[i] -= 32;
+		cout << mas[i];
+	}
+	cout << endl;
+	return 0;
+}
+char* Lowercase(char* mas)
+{
+	for (int i = 0; mas[i] != '\0'; i++)
+	{
+		mas[i] += 32;
+		cout << mas[i];
+	}
+	cout << endl;
+	return 0;
+}
+char* mystrrev(char* mas)
+{
+	int size = 0;
+	for (int i =0; mas[i] != '\0';i++)
+	{
+		size++;
+	}
+	char* new_mas = new char[size] {};
+	for (int i = 0; i < size/2; i++)
+	{
+		char tmp = mas[i];
+		mas[i] = mas[(size - 1) - i];
+		mas[(size - 1) - i] = tmp;
+	}
+	for (int i = 0; i < size; i++)
+	{
+		new_mas[i] = mas[i];
+		cout << new_mas[i];
+	}
+	return 0;
+}
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	int size1 = 100;
+	int size2 = 100;
+	int user_num = 0;
+	char* mas1 = new char[size1] {};
+	char* mas2 = new char[size2] {};
+	/*cout << "Mas 1: ";
+	cin >> mas1;
+	cout << "Mas 2: ";
+	cin >> mas2;
+	mystrcmp(mas1, mas2);
+	cout << "Mas 1: ";
+	cin >> mas1;
+	StrToNum(mas1);*/
+	/*cout << "Enter num: ";
+	cin >> user_num;
+	cout << NumToStr(user_num);*/
+	/*cout << "Enter small letters: ";
+	cin >> mas1;
+	Uppercase(mas1);*/
+	/*cout << "Enter big latters: ";
+	cin >> mas1;
+	Lowercase(mas1);*/
+	cout << "Enter text: ";
+	cin >> mas1;
+	mystrrev(mas1);
+	system("pause");
+	return 0;
+}

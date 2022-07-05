@@ -1,0 +1,74 @@
+
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+int bull_col, cow_col;
+
+int cow(int User_num[4], int Rand_num[4])
+{
+	::cow_col = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		if (User_num[i] == Rand_num[i])
+		{
+			cow_col++;
+		}
+	}
+	cout << "Кол-во коров: " << cow_col << endl;
+	return 0;
+}
+
+int bull(int User_num[4], int Rand_num[4])
+{
+	::bull_col = 0;
+	for (int i = 0; i < 4; i++)
+	{
+		int num = User_num[i];
+		for (int j = 0; j < 4; j++)
+		{
+			if (Rand_num[j] == num)
+			{
+				bull_col++;
+			}
+		}
+	}
+	cout << "Кол-во быков: " << bull_col << endl;
+	return 0;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	int Rand_num[4] = {1,2,3,4};
+	int User_num[4] = {};
+	int write_col = 0;
+	::bull_col, cow_col;
+	/*for (int i = 0; i < 4; i++)
+	{
+		Rand_num[i] += Rand() % 9999;
+	}*/
+	while (true) 
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			cout << i << "Введите число: ";
+			cin >> User_num[i];
+		}
+		cout << endl;
+		cow(User_num, Rand_num);
+		bull(User_num, Rand_num);
+		write_col++;
+		cout << "Кол-во попыток: " << write_col << endl << endl;;
+		if (bull_col == cow_col )
+		{
+			cout << "You Win !!!" << endl;
+		}
+	}
+	system("pause");
+	return 0;
+}

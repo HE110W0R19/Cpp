@@ -1,0 +1,73 @@
+========================================================
+========================================================
+========================================================
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+template <typename T1>
+T1 copy_mas1(T1* mas1, int size)
+{
+	cout << "Задача 1: " << endl;
+	T1* mas2 = new T1[size]{};
+	for (int i = 0; i < size; i++)
+	{
+		*(mas2 + i) += *(mas1 + i);
+		cout << *(mas2 + i) << " ";
+	}
+	cout << endl;
+	return 0;
+	delete[] mas1;
+}
+
+template <typename T2>
+T2 swap_mas2(T2 mas1[], int size)
+{
+	cout << "Задача 2: " << endl;
+	for (int i = 0; i < size/2; i++)
+	{
+		int num = *(mas1 + i);
+		*(mas1 + i) = *(mas1 + ((size-1)-i));
+		*(mas1 + ((size - 1) - i)) = num;
+	}
+	for (int i = 0; i < size; i++)
+	{
+		cout << *(mas1 + i) << " ";
+	}
+	cout << endl;
+	return 0;
+}
+
+template <typename T3>
+T3 swap_mas3(T3* mas1, int size)
+{
+	cout << "Задача 3: " << endl;
+	T3* mas2 = new T3[size]{};
+	for (int i = 0, j = size-1; i < size; i++, j--)
+	{
+		*(mas2 + i) += *(mas1 + j);
+		cout << *(mas2 + i) << " ";
+	}
+	cout << endl;
+	return 0;
+	delete[] mas1;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	int size = 5;
+	int test_mas[5] = {1,2,3,4,5};
+	cout << copy_mas1(test_mas, size);
+	cout << swap_mas2(test_mas, size);
+	cout << swap_mas3(test_mas, size);
+	system("pause");
+	return 0;
+}
+========================================================
+========================================================
+========================================================

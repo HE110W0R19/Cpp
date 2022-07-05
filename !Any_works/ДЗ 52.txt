@@ -1,0 +1,407 @@
+============================================
+Задачи 1 и 2================================
+============================================
+#include<iostream>
+#include<random>
+#include<string.h>
+#include<stdio.h>
+#include<conio.h>
+
+using namespace std;
+random_device Rand;
+
+void AddNewCol(int**& mas, size_t stolbic, size_t stroka)
+{
+	int** tmp = new int* [stolbic] {};
+	for (int i = 0; i < stolbic; i++)
+	{
+		tmp[i] = new int[stroka+1] {};
+	}
+	
+	for (int i = 0; i < stolbic; i++)
+	{
+		for (int j = 0; j < stroka; j++)
+		{
+			tmp[i][j] = mas[i][j];
+		}
+	}
+
+	for (int i = 0; i < stolbic; i++)
+	{
+		for (int j = stroka; j < stroka + 1; j++)
+		{
+			tmp[i][j] = Rand() % 10;
+		}
+	}
+
+	for (int i = 0; i < stolbic; i++)
+	{
+		for (int j = 0; j < stroka + 1; j++)
+		{
+			cout << tmp[i][j] << " ";
+		}
+		cout << endl;
+	}
+}
+
+void DelCol(int**& mas, size_t stolbic, size_t stroka)
+{
+	int** tmp = new int* [stolbic] {};
+	for (int i = 0; i < stolbic; i++)
+	{
+		tmp[i] = new int[stroka - 1];
+	}
+
+	for (int i = 0; i < stolbic; i++)
+	{
+		for (int j = 0; j < stroka - 1; j++)
+		{
+			tmp[i][j] = mas[i][j];
+		}
+	}
+
+	for (int i = 0; i < stolbic; i++)
+	{
+		for (int j = 0; j < stroka - 1; j++)
+		{
+			cout << tmp[i][j] << " ";
+		}
+		cout << endl;
+	}
+}
+
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	size_t row = 4, col = 4;
+
+	int** mas = new int* [col] {};
+	for (int i = 0; i < col; i++)
+	{
+		mas[i] = new int[row] {};
+	}
+
+	for (int i = 0; i < col; i++)
+	{
+		for (int j = 0; j < row; j++)
+		{
+			mas[i][j] = Rand() % 10;
+			cout << mas[i][j] << " ";
+		}
+		cout << endl;
+	}
+	cout << endl << "Задача 1" << endl;
+	cout << endl;
+	AddNewCol(mas, row, col);
+	cout << endl << "Задача 2" << endl;
+	cout << endl;
+	DelCol(mas, row, col);
+
+	for (int i = 0; i < row; i++)
+	{
+		delete[] mas[i];
+	}
+	delete[] mas;
+	system("pause");
+	return 0;
+}
+============================================
+Задача 3=========(Движ с массивом)===========
+============================================
+#include <iostream>
+#include <random>
+#include <string.h>
+#include <stdio.h>
+#include <conio.h>
+
+using namespace std;
+random_device Rand;
+
+void moving(double**& mas, size_t row, size_t col)
+{
+	char key = NULL;
+	while (true)
+	{
+		if (_kbhit())
+		{
+			char key = _getch();
+
+			if (key == 'd')
+			{
+				for (int i = 0; i < row; i++)
+				{
+					double temp = mas[i][col-1];
+					for (int j = col-1; j > 0; j--)
+					{
+						mas[i][j] = mas[i][j - 1];
+					}
+					mas[i][0] = temp;
+				}
+				system("cls");
+				for (int i = 0; i < row; i++)
+				{
+					for (int j = 0; j < col; j++)
+					{
+						cout << mas[i][j] << " ";
+					}
+					cout << endl;
+				}
+			}
+
+			if (key == 'a')
+			{
+				for (int i = 0; i < row; i++)
+				{
+					double temp = mas[i][0];
+					for (int j = 0; j < col; j++)
+					{
+						mas[i][j] = mas[i][j + 1];
+					}
+					mas[i][col - 1] = temp;
+				}
+				system("cls");
+				for (int i = 0; i < row; i++)
+				{
+					for (int j = 0; j < col; j++)
+					{
+						cout << mas[i][j] << " ";
+					}
+					cout << endl;
+				}
+			}
+
+			if (key == 'w')
+			{
+				for (int i = 0; i < col; i++)
+				{
+					double t = mas[0][i];
+					int j;
+					for (j = 0; j < row-1; j++)
+					{
+						mas[j][i] = mas[j + 1][i];
+					}
+					mas[j][i] = t;
+				}
+				system("cls");
+				for (int i = 0; i < row; i++)
+				{
+					for (int j = 0; j < col; j++)
+					{
+						cout << mas[i][j] << " ";
+					}
+					cout << endl;
+				}
+			}
+
+			if (key == 's')
+			{
+				for (int i = 0; i < col; i++)
+				{
+					double t = mas[row - 1][i];
+					int j = 0;
+					for (j = row - 1; j > 0; j--) 
+					{
+						mas[j][i] = mas[j - 1][i];
+					}
+					mas[j][i] = t;
+				}
+				system("cls");
+				for (int i = 0; i < row; i++)
+				{
+					for (int j = 0; j < col; j++)
+					{
+						cout << mas[i][j] << " ";
+					}
+					cout << endl;
+				}
+			}
+		}
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	size_t row = 4, col = 4;
+
+	double** mas = new double* [col] {};
+	for (int i = 0; i < col; i++)
+	{
+		mas[i] = new double[row] {};
+	}
+
+	for (int i = 0; i < col; i++)
+	{
+		for (int j = 0; j < row; j++)
+		{
+			mas[i][j] = Rand() % 10;
+			cout << mas[i][j] << " ";
+		}
+		cout << endl;
+	}
+	
+	moving(mas, row, col);
+	
+	for (int i = 0; i < col;i++)
+	{
+		delete[] mas[i];
+	}
+	delete[] mas;
+	system("pause");
+	return 0;
+}
+==========================================
+Змейка которую не кормят))================
+==========================================
+#include <iostream>
+#include <random>
+#include <string.h>
+#include <stdio.h>
+#include <conio.h>
+
+using namespace std;
+random_device Rand;
+
+void moving(char**& mas, size_t row, size_t col)
+{
+	char key = NULL;
+	while (true)
+	{
+		if (_kbhit())
+		{
+			char key = _getch();
+
+			if (key == 'd')
+			{
+				for (int i = 0; i < row; i++)
+				{
+					char temp = mas[i][col-1];
+					for (int j = col-1; j > 0; j--)
+					{
+						mas[i][j] = mas[i][j - 1];
+					}
+					mas[i][0] = temp;
+				}
+				system("cls");
+				for (int i = 0; i < row; i++)
+				{
+					for (int j = 0; j < col; j++)
+					{
+						cout << mas[i][j] << " ";
+					}
+					cout << endl;
+				}
+			}
+
+			if (key == 'a')
+			{
+				for (int i = 0; i < row; i++)
+				{
+					char temp = mas[i][0];
+					for (int j = 0; j < col; j++)
+					{
+						mas[i][j] = mas[i][j + 1];
+					}
+					mas[i][col - 1] = temp;
+				}
+				system("cls");
+				for (int i = 0; i < row; i++)
+				{
+					for (int j = 0; j < col; j++)
+					{
+						cout << mas[i][j] << " ";
+					}
+					cout << endl;
+				}
+			}
+
+			if (key == 'w')
+			{
+				for (int i = 0; i < col; i++)
+				{
+					char t = mas[0][i];
+					int j;
+					for (j = 0; j < row-1; j++)
+					{
+						mas[j][i] = mas[j + 1][i];
+					}
+					mas[j][i] = t;
+				}
+				system("cls");
+				for (int i = 0; i < row; i++)
+				{
+					for (int j = 0; j < col; j++)
+					{
+						cout << mas[i][j] << " ";
+					}
+					cout << endl;
+				}
+			}
+
+			if (key == 's')
+			{
+				for (int i = 0; i < col; i++)
+				{
+					char t = mas[row - 1][i];
+					int j = 0;
+					for (j = row - 1; j > 0; j--) 
+					{
+						mas[j][i] = mas[j - 1][i];
+					}
+					mas[j][i] = t;
+				}
+				system("cls");
+				for (int i = 0; i < row; i++)
+				{
+					for (int j = 0; j < col; j++)
+					{
+						cout << mas[i][j] << " ";
+					}
+					cout << endl;
+				}
+			}
+		}
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	size_t row = 20, col = 20;
+
+	char** mas = new char* [col] {};
+	for (int i = 0; i < col; i++)
+	{
+		mas[i] = new char[row] {};
+	}
+
+	for (int i = 0; i < col; i++)
+	{
+		for (int j = 0; j < row; j++)
+		{
+			mas[i][j] = '.';
+		}
+		cout << endl;
+	}
+	for (int i = 0; i < 1; i++)
+	{
+		for (int j = 0; j < 1; j++)
+		{
+			mas[i][j] = '#';
+		}
+		cout << endl;
+	}
+	cout << "Нажмимайте a,d,w,s для перемещения\n"
+		"для старта нажмите любую из этих букв " << endl;
+	moving(mas, row, col);
+	
+	for (int i = 0; i < col;i++)
+	{
+		delete[] mas[i];
+	}
+	delete[] mas;
+	system("pause");
+	return 0;
+}
+

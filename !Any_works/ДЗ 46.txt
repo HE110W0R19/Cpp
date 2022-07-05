@@ -1,0 +1,305 @@
+==============================================
+Задача 1===================================
+==============================================
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+
+template <typename T>
+T add_num(T* mas, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		*(mas + i) = Rand() % 10;
+		cout << *(mas + i) << " ";
+	}
+	return 0;
+}
+template <typename T2>
+T2 del_mas(T2 mas[])
+{
+	delete[] mas;
+	return 0;
+}
+
+template <typename T3>
+T3 add_to_end(T3* mas, size_t size)
+{
+	if (mas == nullptr && size != 0)
+	{
+		return 0;
+	}
+	T3* new_mas = new T3[size + 1]{};
+	for (int i = 0; i < size; i++)
+	{
+		*(new_mas + i) = *(mas + i);
+	}
+	new_mas[size] = Rand() % 10;
+	for (int i = 0; i < size + 1; i++)
+	{
+		cout << *(new_mas + i) << " ";
+	}
+	return 0;
+}
+
+template <typename T4>
+T4 add_in_pozition(T4* mas, size_t size, size_t user_pozition)
+{
+	if (mas == nullptr)
+	{
+		return 0;
+	}
+	if (user_pozition > size)
+	{
+		cout << "Такой позиции нет!" << endl;
+	}
+	T4* new_mas = new T4[size + 1];
+	for (int i = 0; i < user_pozition; i++)
+	{
+		*(new_mas + i) = *(mas + i);
+	}
+	new_mas[user_pozition] = Rand() % 10;
+	for (int i = user_pozition; i < size; i++)
+	{
+		new_mas[i + 1] = mas[i];
+	}
+	for (int i = 0; i < size+1; i++)
+	{
+		cout << *(new_mas + i) << " ";
+	}
+	return 0;
+}
+
+template <typename T5>
+T5 del_in_pozition(T5* mas, size_t size, size_t user_pozition)
+{
+	if (mas == nullptr)
+	{
+		return 0;
+	}
+	if (user_pozition > size)
+	{
+		cout << "Такой позиции нет!" << endl;
+	}
+	T5* new_mas = new T5[size - 1]{};
+	for (int i = 0; i < user_pozition; i++)
+	{
+		*(new_mas + i) = *(mas + i);
+	}
+	for (int i = user_pozition+1; i < size; i++)
+	{
+		new_mas[i] = mas[i];
+	}
+	for (int i = 0; i < size; i++)
+	{
+		cout << *(new_mas + i) << " ";
+	}
+	return 0;
+}
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	int size = 0;
+	int user_num = 0;
+	cout << "Enter mas size: ";
+	cin >> size;
+	int* mas = new int[size];
+	add_num(mas, size);
+	cout << endl;
+	cout << "1 - добавление эл-та в конец" << endl;
+	cout << "2 - добавление эл-та в позицию" << endl;
+	cout << "3 - удаление эл-та из позиции" << endl;
+	cout << "0 - выход" << endl;
+	cin >> user_num;
+	switch (user_num)
+	{
+	default:
+		cout << "Как обычно что-то пошло не по плану! " << endl;
+	case 1:
+		add_to_end(mas, size);
+		cout << endl;
+		break;
+	case 2:
+		cout << "Enter poz-ion: ";
+		cin >> user_num;
+		add_in_pozition(mas, size, user_num);
+		cout << endl;
+		break;
+	case 3:
+		cout << "Enter poz-ion: ";
+		cin >> user_num;
+		del_in_pozition(mas, size, user_num);
+		cout << endl;
+		break;
+	}
+	del_mas(mas);
+	system("pause");
+	return 0;
+}
+==============================================
+Задача 2===================================
+==============================================
+#include<iostream>
+#include<cmath>
+#include<random>
+
+using namespace std;
+random_device Rand;
+
+template<typename R>
+R rand_nums(R* mas, R size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		*(mas + i) = Rand() % 10;
+		cout << *(mas + i) << " ";
+	}
+	cout << endl;
+	return 0;
+}
+
+template <typename T>
+T delete_nums(T* mas, size_t size)
+{
+	size_t new_size = 0;
+	T* new_mas = new T[new_size]{};
+	for (int i = 0; i < size; i++)
+	{
+		if (*(mas + i) % 2 == 0)
+		{
+			*(mas + i) = -1;
+			new_size++;
+		}
+	}
+	new_size = size - new_size;
+	cout << endl;
+	for (int i = 0; i < size; i++)
+	{
+		cout << mas[i] << " ";
+	}
+	cout << endl << new_size << endl;
+	for (int i = 0; i < size; i++)
+	{
+		if (*(mas+i) > 0) 
+		{
+			for (int j = 0; j < new_size; j++)
+			{
+				*(new_mas + i) = *(mas+i);
+			}
+		}
+	}
+	*mas = *new_mas;
+	for (int i = 0; i < new_size; i++)
+	{
+		cout << *(mas + i) << " ";
+	}
+	return 0;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	int size = 5;
+	int* mas = new int[size] {};
+	rand_nums(mas, size);
+	delete_nums(mas, size);
+
+	system("pause");
+	return 0;
+}
+==============================================
+Задача 3===================================
+==============================================
+#include<iostream>
+#include<cmath>
+#include<random>
+
+using namespace std;
+random_device Rand;
+
+template <typename R>
+R rand_nums(R* mas)
+{
+	for (int i = 0; i < 10; i++)
+	{
+		*(mas+i) = Rand() % 20 - 10;
+		cout << *(mas + i) << " ";
+	}
+	return 0;
+}
+
+template <typename T>
+T create_mas(T* mas, int size)
+{
+	size_t plus_size = 0;
+	T* plus_mas = new T[plus_size]{};
+
+	size_t minus_size = 0;
+	T* minus_mas = new T[minus_size]{};
+
+	size_t null_size = 0;
+	T* null_mas = new T[null_size]{};
+	cout << endl;
+	for (int i = 0; i < size; i++)
+	{
+		if (*(mas + i) > 0)
+		{
+			plus_size++;
+			*(plus_mas + plus_size) = *(mas + i);
+		}
+		else if (*(mas + i) < 0)
+		{
+			minus_size++;
+			*(minus_mas + minus_size) = *(mas + i);
+		}
+		else if (*(mas + i) == 0)
+		{
+			null_size++;
+			*(null_mas + null_size) = *(mas + i);
+		}
+	}
+
+	if (plus_size != 0)
+	{
+		cout << endl;
+		for (int i = 1; i <= plus_size; i++)
+		{
+			cout << *(plus_mas + i) << " ";
+		}
+	}
+
+	if (minus_size != 0) 
+	{
+		cout << endl;
+		for (int i = 1; i <= minus_size; i++)
+		{
+			cout << *(minus_mas + i) << " ";
+		}
+	}
+
+	if (null_size != 0)
+	{
+		cout << endl;
+		for (int i = 1; i <= null_size; i++)
+		{
+			cout << *(null_mas + i) << " ";
+		}
+	}
+	return 0;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	const int user_size = 10;
+	int user_mas[user_size] = {};
+	rand_nums(user_mas);
+	create_mas(user_mas, user_size);
+	system("pause");
+	return 0;
+}

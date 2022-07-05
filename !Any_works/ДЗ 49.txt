@@ -1,0 +1,278 @@
+==============================================
+Задача №1==================================
+==============================================
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+void del(char* mas, int size, int pozition) 
+{
+	int new_size = size-1;
+	char* new_mas = new char[new_size] {};
+	for (int i = 0; i < pozition; i++)
+	{
+		new_mas[i] = mas[i];
+	}
+	for (int i = pozition+1,j=pozition; mas[i] != '\0'; i++, j++)
+	{
+		new_mas[j] = mas[i];
+	}
+	cout << new_mas << endl;
+	return ;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	const int user_size = 50;
+	int user_pozition=0;
+	char user_mas[user_size] = {};
+	cout << "Enter text: ";
+	cin >> user_mas;
+	cout << "Enter delete pozition: ";
+	cin >> user_pozition;
+
+	del(user_mas, user_size, user_pozition);
+
+	system("pause");
+	return 0;
+}
+==============================================
+Задача №2==================================
+==============================================
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+void del(char* mas, int size, char sim) 
+{
+	int new_size = size;
+	for (int i = 0; i<size; i++)
+	{
+		if (mas[i] == sim)
+		{
+			new_size--;
+		}
+	}
+	char* new_mas = new char[new_size] {};
+	for (int i = 0, j = 0; mas[j] != '\0';i++)
+	{
+		if (mas[j] != sim)
+		{
+			new_mas[i] = mas[j];
+			j++;
+		}
+		else
+		{
+			j++;
+			i--;
+		}
+	}
+	cout << new_mas << endl;
+	return;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	const int user_size = 50;
+	char user_sim;
+	char user_mas[user_size]={};
+	cout << "Enter text: ";
+	cin >> user_mas;
+	cout << "Enter delete sim-ol: ";
+	cin >> user_sim;
+
+	del(user_mas, user_size, user_sim);
+
+	system("pause");
+	return 0;
+}
+==============================================
+Задача №3==================================
+==============================================
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+void del(char* mas, int size, char sim, int pozition) 
+{
+	int new_size = size+1;
+	char* new_mas = new char[new_size] {};
+	for (int i = 0; i < pozition; i++)
+	{
+		new_mas[i] = mas[i];
+	}
+	new_mas[pozition] = sim;
+	for (int i = pozition+1, j=pozition; i < new_size; i++, j++)
+	{
+		new_mas[i] = mas[j];
+	}
+
+	cout << new_mas << endl;
+	return;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	const int user_size = 50;
+	int pozition=0;
+	char user_sim;
+	char user_mas[user_size]={};
+	cout << "Enter text: ";
+	cin >> user_mas;
+	cout << "Enter pozition: ";
+	cin >> pozition;
+	cout << "Enter sim-ol: ";
+	cin >> user_sim;
+
+	del(user_mas, user_size, user_sim, pozition);
+
+	system("pause");
+	return 0;
+}
+==============================================
+Задача №4==================================
+==============================================
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+void del(char* mas, char sim_user, char sim_change) 
+{
+	for (int i = 0; mas[i] != '\0'; i++)
+	{
+		if (mas[i] == sim_user)
+		{
+			mas[i] = sim_change;
+		}
+	}
+	return;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	const int user_size = 50;
+	char user_sim;
+	char chang_sim;
+	char user_mas[user_size]={};
+	cout << "Enter text: ";
+	cin >> user_mas;
+	cout << "Enter wants sim: ";
+	cin >> user_sim;
+	cout << "Enter change sim-ol: ";
+	cin >> chang_sim;
+
+	del(user_mas, user_sim, chang_sim);
+	cout << user_mas << endl;
+	system("pause");
+	return 0;
+}
+==============================================
+Задача №5==================================
+==============================================
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+void del(char* mas, char sim_search) 
+{
+	int col = 0;
+	for (int i = 0; mas[i] != '\0'; i++)
+	{
+		if (mas[i] == sim_search)
+		{
+			col++;
+		}
+	}
+	cout << "Колличество: " << col << endl;
+	return;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	const int user_size = 50;
+	char user_sim;
+	char user_mas[user_size]={};
+	cout << "Enter text: ";
+	cin >> user_mas;
+	cout << "Enter search sim: ";
+	cin >> user_sim;
+
+	cout << user_mas << endl;
+	del(user_mas, user_sim);
+	
+	system("pause");
+	return 0;
+}
+==============================================
+Задача №6==================================
+==============================================
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+void del(char* mas, size_t size) 
+{
+	int num_col = 0, sim_col = 0, some_sim_col = 0;
+	for (int i = 0; mas[i] != '\0'; i++) {
+		if (mas[i] >= 48 && mas[i] <= 57)
+		{
+			num_col++;
+		}
+		if (mas[i] >= 97 && mas[i] <= 122 || mas[i] >= 65 && mas[i] <= 90)
+		{
+			sim_col++;
+		}
+		if (mas[i] >= 33 && mas[i] <= 47 || mas[i] >= 58 && mas[i] <= 64)
+		{
+			//Некоторых символов нет (все символы переводятся из таблицы кода аски)
+			some_sim_col++;
+		}
+	}
+	cout << "Кол-во цифр: " << num_col << endl;
+	cout << "Колл-во символов: " << sim_col << endl;
+	cout << "Кол-во остальных символов: " << some_sim_col << endl;
+	return;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	const int user_size = 50;
+	char user_mas[user_size]={};
+	cout << "Enter text: " << endl;
+	cin >> user_mas;
+
+	del(user_mas, user_size);
+	
+	system("pause");
+	return 0;
+}

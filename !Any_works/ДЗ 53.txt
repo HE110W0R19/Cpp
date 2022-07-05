@@ -1,0 +1,93 @@
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+Задача 2
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#include <iostream>
+#include <random>
+#include <string.h>
+#include <vector>
+#include <windows.h>
+#include <map>
+#include <queue>
+#include <fstream>
+using namespace std;
+random_device Rand;
+
+struct car
+{
+	string name = "";
+	uint16_t lenght = 0;
+	uint16_t clerance = 0;
+	uint16_t engine_v = 0;
+	uint32_t hp = 0;
+	uint16_t wheel_r = 0;
+	string color = "";
+	string gear_type = "";
+
+	car()
+	{
+		cout << "Enter name: ";
+		cin >> name;
+		cout << "Enter lenght: ";
+		cin >> lenght;
+		cout << "Enter clearance: ";
+		cin >> clerance;
+		cout << "Enter engine V: ";
+		cin >> engine_v;
+		cout << "Enter HP: ";
+		cin >> hp;
+		cout << "Enter wheel R: ";
+		cin >> wheel_r;
+		cout << "Enter color: ";
+		cin >> color;
+		cout << "Enter gear type: ";	
+		cin >> gear_type;
+	}
+	void print_car(const car* tmp, uint16_t col) const
+	{
+		for (int i = 0; i < col; i++) 
+		{
+			cout << "\nName: " << tmp[i].name << endl;
+			cout << "Lenght: " << tmp[i].lenght << endl;
+			cout << "Clerance: " << tmp[i].clerance << endl;
+			cout << "Engine V: " << tmp[i].engine_v << endl;
+			cout << "HP: " << tmp[i].hp << endl;
+			cout << "Wheel R: " << tmp[i].wheel_r << endl;
+			cout << "Color: " << tmp[i].color << endl;
+			cout << "Gear type: " << tmp[i].gear_type << endl;
+
+		}
+	}
+	void search_car(const car* tmp, uint16_t col)
+	{
+		string search_name;
+		cout << "Enter search name: ";
+		cin >> search_name;
+		for (int i = 0; i < col; i++)
+		{
+			if (tmp[i].name == search_name)
+			{
+				print_car(&tmp[i], 1);
+			}
+		}
+	}
+
+};
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	
+	uint16_t car_col = 0;
+	cout << "Enter car col: ";
+	cin >> car_col;
+	car* my_cars = new car[car_col];
+	my_cars->print_car(my_cars, car_col);
+	my_cars->search_car(my_cars, car_col);
+
+
+
+	system("pause");
+	return 0;
+}
+
+

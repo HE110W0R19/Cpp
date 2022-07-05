@@ -1,0 +1,127 @@
+#include<iostream>
+#include<cmath>
+#include<random>
+#include<string>
+
+using namespace std;
+random_device Rand;
+
+template <typename T>
+T rand_mas(T* mas, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		*(mas + i) = Rand() % 10;
+		cout << *(mas + i) << " ";
+	}
+	cout << endl;
+	return 0;
+}
+
+template <typename T1>
+T1 create_1(T1* mas1, T1* mas2, size_t size1, size_t size2)
+{
+	size_t size3 = 0;
+	T1* mas3 = new T1[size3];
+	for (int i = 0; i < size1; i++)
+	{
+		for (int j = 0; j < size2; j++)
+		{
+			if (*(mas1+i) == *(mas2 + j))
+			{
+				*(mas2 + j) = -1;
+			}
+		}
+	}
+	cout << endl;
+	for (int i = 0; i < size2; i++)
+	{
+		cout << *(mas2 + i) << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < size2; i++)
+	{
+		if (*(mas2 + i) >= 0) 
+		{
+			*(mas3 + size3)=*(mas2+i);
+			size3++;
+		}
+	}
+	cout << endl;
+	for (int i = 0; i < size3; i++)
+	{
+		cout << *(mas3 + i) << " ";
+	}
+	delete[] mas1;
+	delete[] mas2;
+	return 0;
+}
+
+template <typename T2>
+T2 create_2(T2* mas1, T2* mas2, int size1, int size2)
+{
+	size_t size4 = 0;
+	int size3 = size1 + size2;
+	T2* mas3 = new T2[size3]{};
+	T2* mas4 = new T2[size4]{};
+	for (int i = 0; i < size1; i++)
+	{
+		for (int j = 0; j < size2; j++)
+		{
+			if (*(mas1 + i) == *(mas2 + j))
+			{
+				*(mas2 + j) = -1;
+				*(mas1 + i) = -1;
+			}
+		}
+	}
+	for (int i = 0; i < size1; i++)
+	{
+		*(mas3 + i) = *(mas1 + i);
+	}
+	for (int i = size1, j=0; j < size2; i++, j++)
+	{
+		*(mas3 + i) = *(mas2 + j);
+	}
+	cout << endl;
+	for (int i = 0; i < size3; i++)
+	{
+		cout << *(mas3 + i) << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < size3; i++)
+	{
+		if (*(mas3 + i) >= 0)
+		{
+			*(mas4 + size4) = *(mas3 + i);
+			size4++;
+		}
+	}
+	cout << endl;
+	for (int i = 0; i < size4; i++)
+	{
+		cout << *(mas4 + i) << " ";
+	}
+	cout << endl;
+	return 0;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Rus");
+	int size1 = 0;
+	int size2 = 0;
+	cout << "Enter size 1: ";
+	cin >> size1;
+	cout << "Enter  size 2: ";
+	cin >> size2;
+	int* mas1 = new int[size1] {};
+	int* mas2 = new int[size2] {};
+	rand_mas(mas1, size1);
+	rand_mas(mas2, size2);
+	create_1(mas1, mas2, size1, size2);
+	create_2(mas1, mas2, size1, size2);
+   
+	system("pause");
+	return 0;
+}
